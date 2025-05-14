@@ -15,9 +15,7 @@ class RedditClient:
         reddit (praw.Reddit): An instance of the Reddit API client.
     """
 
-    def __init__(
-        self,
-    ):
+    def __init__(self):
         self.reddit = praw.Reddit(
             client_id=os.getenv("REDDIT_CLIENT_ID"),
             client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
