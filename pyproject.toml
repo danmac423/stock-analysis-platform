@@ -10,5 +10,17 @@ dependencies = [
     "praw>=7.8.1",
     "torch>=2.7.0",
     "transformers>=4.51.3",
-    "yfinance>=0.2.57",
+    "yfinance>=0.2.61",
 ]
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "W"]
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
