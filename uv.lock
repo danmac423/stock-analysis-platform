@@ -1183,6 +1183,7 @@ dependencies = [
     { name = "finnhub-python" },
     { name = "mypy" },
     { name = "praw" },
+    { name = "ta-lib" },
     { name = "torch" },
     { name = "transformers" },
     { name = "yfinance" },
@@ -1194,6 +1195,7 @@ requires-dist = [
     { name = "finnhub-python", specifier = ">=2.4.23" },
     { name = "mypy", specifier = ">=1.15.0" },
     { name = "praw", specifier = ">=7.8.1" },
+    { name = "ta-lib", specifier = ">=0.6.3" },
     { name = "torch", specifier = ">=2.7.0" },
     { name = "transformers", specifier = ">=4.51.3" },
     { name = "yfinance", specifier = ">=0.2.61" },
@@ -2287,6 +2289,16 @@ sdist = { url = "https://files.pythonhosted.org/packages/83/d3/803453b36afefb7c2
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl", hash = "sha256:e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5", size = 6299353, upload-time = "2025-04-27T18:04:59.103Z" },
 ]
+
+[[package]]
+name = "ta-lib"
+version = "0.6.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy" },
+    { name = "setuptools" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/35/dc/e7fab66315fdd2e2eeb2e3dbb9d23ea615bafc1e9174a8965d310e40a3c2/ta_lib-0.6.3.tar.gz", hash = "sha256:0c628db09b3fab6e5c26979e608b674e7aecc10359c82ba8d53f729767a856ac", size = 376798, upload-time = "2025-02-10T22:17:43.489Z" }
 
 [[package]]
 name = "tenacity"
