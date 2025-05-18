@@ -7,8 +7,11 @@ requires-python = ">=3.13"
 dependencies = [
     "crewai>=0.119.0",
     "finnhub-python>=2.4.23",
+    "markdown-it-py>=3.0.0",
     "mypy>=1.15.0",
+    "plotly>=6.1.0",
     "praw>=7.8.1",
+    "streamlit>=1.45.1",
     "ta-lib>=0.6.3",
     "torch>=2.7.0",
     "transformers>=4.51.3",
