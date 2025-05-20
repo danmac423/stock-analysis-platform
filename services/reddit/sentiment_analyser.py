@@ -1,6 +1,8 @@
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
+torch.classes.__path__ = []
+
 
 class SentimentAnalyser:
     """
@@ -33,9 +35,7 @@ class SentimentAnalyser:
         """
         if not text or text.strip() in ("[removed]", "[deleted]"):
             return "neutral"
-        inputs = self.tokenizer(
-            text, return_tensors="pt", truncation=True, max_length=512
-        )
+        inputs = self.tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
         with torch.inference_mode():
             outputs = self.model(**inputs)
         scores = outputs.logits.softmax(dim=1).numpy()[0]

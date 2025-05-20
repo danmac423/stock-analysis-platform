@@ -1,5 +1,5 @@
 from crewai import LLM, Agent, Crew, Task
-from dotenv import load_dotenv
+
 from tools.reddit_sentiment_analysis_tool import analyse_reddit
 from tools.yahoo_analysis_tool import fetch_yahoo_analysis
 from tools.yahoo_fundamental_analysis_tool import analyse_fundamentals
@@ -8,9 +8,7 @@ from tools.yahoo_technical_analysis_tool import analyse_technical_indicators
 
 
 class StockAnalysisCrew:
-    def __init__(self, stock_symbol: str, api_key: str):
-        load_dotenv()
-        self.stock_symbol = stock_symbol.upper()
+    def __init__(self, api_key: str):
         self.api_key = api_key
         self.llm = LLM(
             model="gemini/gemini-2.0-flash",
@@ -160,5 +158,5 @@ class StockAnalysisCrew:
             verbose=True,
         )
 
-    def run(self):
-        return self.crew.kickoff(inputs={"stock_symbol": self.stock_symbol})
+    def run(self, stock_symbol: str):
+        return self.crew.kickoff(inputs={"stock_symbol": stock_symbol.upper()})
