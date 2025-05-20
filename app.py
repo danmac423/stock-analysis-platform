@@ -150,7 +150,7 @@ if st.session_state.report is not None:
     st.markdown(st.session_state.report)
 
 
-if not st.session_state.get("stock_fig") and not st.session_state.get("stock_metrics"):
+if not st.session_state.get("stock_fig") and not st.session_state.get("report"):
     st.markdown(
         """
 ## AI-Powered Stock Analysis Platform
