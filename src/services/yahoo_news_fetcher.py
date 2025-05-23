@@ -35,9 +35,7 @@ class YahooNewsFetcher:
                     "title": content.get("title", ""),
                     "summary": content.get("summary", ""),
                     "source": content.get("provider", dict()).get("displayName", ""),
-                    "pubDate": datetime.fromisoformat(
-                        content.get("pubDate", "")
-                    ).strftime("%Y-%m-%d"),
+                    "pubDate": datetime.fromisoformat(content.get("pubDate", "")).strftime("%Y-%m-%d"),
                 }
             )
 

@@ -22,9 +22,7 @@ class RedditClient:
             user_agent=os.getenv("REDDIT_USER_AGENT"),
         )
 
-    def get_posts(
-        self, subreddit: str, query: str, post_limit: int = 50, days: int = 30
-    ) -> list:
+    def get_posts(self, subreddit: str, query: str, post_limit: int = 50, days: int = 30) -> list:
         """
         Fetches posts from a specific subreddit based on a query.
         Args:

@@ -68,7 +68,13 @@ def escape_markdown_specials(text: str) -> str:
 
 
 def load_stock_data(symbol: str, period: dict) -> pd.DataFrame:
-    return yf.download(symbol, period=period["period"], interval=period["interval"], auto_adjust=True, progress=False)
+    return yf.download(
+        symbol,
+        period=period["period"],
+        interval=period["interval"],
+        auto_adjust=True,
+        progress=False,
+    )
 
 
 if "stock_fig" not in st.session_state:
@@ -108,14 +114,21 @@ if sidebar_col1.button("Update", type="primary", use_container_width=True):
     if chart_type == "Candlestick":
         fig.add_trace(
             go.Candlestick(
-                x=data["Datetime"], open=data["Open"], high=data["High"], low=data["Low"], close=data["Close"]
+                x=data["Datetime"],
+                open=data["Open"],
+                high=data["High"],
+                low=data["Low"],
+                close=data["Close"],
             )
         )
     else:
         fig = px.line(data, x="Datetime", y="Close")
 
     fig.update_layout(
-        title=f"{ticker} {time_period.upper()} Chart", xaxis_title="Time", yaxis_title="Price (USD)", height=600
+        title=f"{ticker} {time_period.upper()} Chart",
+        xaxis_title="Time",
+        yaxis_title="Price (USD)",
+        height=600,
     )
 
     st.session_state.stock_fig = fig
@@ -136,7 +149,11 @@ if st.session_state.stock_metrics is not None:
     low = st.session_state.stock_metrics["low"]
     volume = st.session_state.stock_metrics["volume"]
 
-    st.metric(label=f"{ticker} Last Price", value=f"{last_close:.2f} USD", delta=f"{change:.2f} ({pct_change:.2f}%)")
+    st.metric(
+        label=f"{ticker} Last Price",
+        value=f"{last_close:.2f} USD",
+        delta=f"{change:.2f} ({pct_change:.2f}%)",
+    )
     col1, col2, col3 = st.columns(3)
     col1.metric("High", f"{high:.2f} USD")
     col2.metric("Low", f"{low:.2f} USD")
