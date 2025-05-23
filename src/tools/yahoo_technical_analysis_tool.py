@@ -2,7 +2,7 @@ import json
 
 from crewai.tools import tool
 
-from services.yahoo_technical_analyser import YahooTechnicalAnalyser
+from src.services.yahoo_technical_analyser import YahooTechnicalAnalyser
 
 
 @tool

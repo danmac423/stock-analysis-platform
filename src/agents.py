@@ -1,10 +1,10 @@
 from crewai import LLM, Agent, Crew, Task
 
-from tools.reddit_sentiment_analysis_tool import analyse_reddit
-from tools.yahoo_analysis_tool import fetch_yahoo_analysis
-from tools.yahoo_fundamental_analysis_tool import analyse_fundamentals
-from tools.yahoo_news_tool import fetch_yahoo_news
-from tools.yahoo_technical_analysis_tool import analyse_technical_indicators
+from src.tools.reddit_sentiment_analysis_tool import analyse_reddit
+from src.tools.yahoo_analysis_tool import fetch_yahoo_analysis
+from src.tools.yahoo_fundamental_analysis_tool import analyse_fundamentals
+from src.tools.yahoo_news_tool import fetch_yahoo_news
+from src.tools.yahoo_technical_analysis_tool import analyse_technical_indicators
 
 
 class StockAnalysisCrew:
@@ -149,6 +149,7 @@ class StockAnalysisCrew:
             ),
             agent=reporter,
             context=[research_task, technical_analysis_task, fundamental_analysis_task],
+            output_file="stock_analysis_report.md",
         )
 
         self.crew = Crew(

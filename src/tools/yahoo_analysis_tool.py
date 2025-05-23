@@ -2,7 +2,7 @@ import json
 
 from crewai.tools import tool
 
-from services.yahoo_analysis_fetcher import YahooAnalysisFetcher
+from src.services.yahoo_analysis_fetcher import YahooAnalysisFetcher
 
 
 @tool

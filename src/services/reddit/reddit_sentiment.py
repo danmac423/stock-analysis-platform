@@ -1,5 +1,5 @@
-from services.reddit.reddit_client import RedditClient
-from services.reddit.sentiment_analyser import SentimentAnalyser
+from src.services.reddit.reddit_client import RedditClient
+from src.services.reddit.sentiment_analyser import SentimentAnalyser
 
 
 class RedditSentimentAnalyser:
@@ -15,9 +15,7 @@ class RedditSentimentAnalyser:
         self.reddit_client = RedditClient()
         self.sentiment_analyser = SentimentAnalyser()
 
-    def analyse(
-        self, subreddits: list, stock: str, post_limit: int = 50, days: int = 30
-    ) -> dict:
+    def analyse(self, subreddits: list, stock: str, post_limit: int = 50, days: int = 30) -> dict:
         """
         Analyses Reddit sentiment for a given stock across multiple subreddits.
         Args:

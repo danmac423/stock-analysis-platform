@@ -6,7 +6,7 @@ import talib as ta
 import yfinance as yf
 from markdown_it import MarkdownIt
 
-from agents import StockAnalysisCrew
+from src.agents import StockAnalysisCrew
 
 INTERVAL_MAPPING = [
     {"period": "1d", "interval": "1m"},

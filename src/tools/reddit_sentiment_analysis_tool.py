@@ -2,7 +2,7 @@ import json
 
 from crewai.tools import tool
 
-from services.reddit.reddit_sentiment import RedditSentimentAnalyser
+from src.services.reddit.reddit_sentiment import RedditSentimentAnalyser
 
 analyser = RedditSentimentAnalyser()
 

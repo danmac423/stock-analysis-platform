@@ -2,7 +2,7 @@ import json
 
 from crewai.tools import tool
 
-from services.alpha_vantage_fundamental_analyser import AlphaVantageFundamentalAnalyser
+from src.services.alpha_vantage_fundamental_analyser import AlphaVantageFundamentalAnalyser
 
 
 @tool

@@ -2,7 +2,7 @@ import json
 
 from crewai.tools import tool
 
-from services.yahoo_news_fetcher import YahooNewsFetcher
+from src.services.yahoo_news_fetcher import YahooNewsFetcher
 
 
 @tool
