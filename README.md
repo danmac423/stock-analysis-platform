@@ -1,93 +1,134 @@
-# NLP-2025L
+# Stock Investment Analysis Platform (nlp-2025l)
+
+[![Python Version](https://img.shields.io/badge/python-3.13%2B-blue.svg)](https://www.python.org/downloads/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.45.1-orange.svg)](https://streamlit.io)
+[![CrewAI](https://img.shields.io/badge/CrewAI-0.119.0-green.svg)](https://www.crewai.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ## Overview
+
+The Stock Investment Analysis Platform is an AI-powered application designed to provide comprehensive investment insights and generate detailed analysis reports for publicly traded stocks. It leverages a team of AI agents, each specializing in a different aspect of stock analysis, to gather, process, and synthesize information from various sources. The platform aims to help investors make more informed, data-driven decisions.
+
+The final output is a cohesive investment report in Markdown format, offering an executive summary, synthesized analyses (sentiment, technical, fundamental), discussion of convergences/divergences, catalysts, risk factors, and an investment outlook with recommendations.
+
+## Features
+
+* **Multi-Agent Analysis:** Utilizes a team of AI agents (powered by CrewAI and Google Gemini) for specialized tasks:
+    * **Senior Stock Market Researcher:** Gathers qualitative data, public sentiment from Reddit, Yahoo News, and Yahoo financial analyses.
+    * **Expert Technical Analyst:** Performs in-depth technical analysis using a wide array of indicators.
+    * **Senior Fundamental Analyst:** Conducts comprehensive fundamental analysis of the company's financial health, valuation, and market position using Yahoo Finance data.
+    * **Chief Investment Strategist:** Synthesizes all analyses into a final investment report.
+* **Interactive Web Interface:** Built with Streamlit for easy user interaction, allowing users to input stock symbols and view charts and reports.
+* **Data Sources:**
+    * **Yahoo Finance (yfinance):** For historical stock data, company information, financial news, analyst estimates, and fundamental data.
+    * **Reddit:** For public sentiment analysis on specified subreddits (e.g., r/wallstreetbets, r/stocks, r/investing).
+* **Comprehensive Analysis:**
+    * **Sentiment Analysis:** Processes Reddit discussions, Yahoo News, and analyst opinions to gauge public sentiment towards the stock.
+    * **Technical Analysis:** Calculates and interprets indicators like SMAs, EMAs, MACD, RSI, Bollinger Bands, Stochastics, ATR, OBV, and more. Identifies trends, patterns, support/resistance levels.
+    * **Fundamental Analysis:** Assesses financial health, profitability, growth prospects, valuation (P/E, P/S, D/E, ROE, etc.), and overall intrinsic value.
+* **Dynamic Charting:** Displays stock price charts (candlestick or line) with configurable time periods using Plotly.
+
+## How it Works (Architecture)
+
+The platform operates using a multi-agent system orchestrated by CrewAI:
+1.  The user inputs a stock symbol and API key via the Streamlit interface.
+2.  An `StockAnalysisCrew` is initialized, which consists of four distinct AI agents: a Researcher, a Technical Analyst, a Fundamental Analyst, and a Reporter. These agents use Google's Gemini LLM (`gemini/gemini-2.0-flash`).
+3.  Each agent is assigned specific tasks:
+    * The **Researcher** gathers news from Yahoo Finance, analyst opinions from Yahoo, and sentiment from Reddit discussions.
+    * The **Technical Analyst** fetches historical market data from Yahoo Finance and performs technical analysis using TA-Lib.
+    * The **Fundamental Analyst** fetches and analyzes company overview, financial statements, and key ratios from Yahoo Finance.
+    * The **Reporter** takes the outputs from the other three agents, synthesizes the information, identifies convergences/divergences, and compiles a comprehensive investment report.
+4.  The final report is displayed in the Streamlit application.
+
+## Technologies Used
+
+* **Backend & AI:**
+    * Python
+    * CrewAI (`>=0.119.0`)
+    * Google Gemini (via CrewAI LLM integration)
+    * Transformers (`>=4.51.3`) (for local sentiment analysis model)
+    * PyTorch (`>=2.7.0`)
+* **Data Handling & Analysis:**
+    * Pandas
+    * NumPy
+    * yfinance (`>=0.2.61`) (for Yahoo Finance data)
+    * PRAW (`>=7.8.1`) (for Reddit data)
+    * TA-Lib (`>=0.6.3`) (for technical indicators)
+* **Web Interface & Visualization:**
+    * Streamlit (`>=1.45.1`)
+    * Plotly (`>=6.1.0`)
 
 
+## Setup and Installation
 
-## Getting started
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd nlp-2025l
+    ```
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+2.  **Create a virtual environment (recommended):**
+    ```bash
+    make create_environment
+    source .venv/bin/activate
+    ```
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+3.  **Install dependencies:**
+    ```bash
+    make requirements
+    ```
+    *Note on TA-Lib:* TA-Lib can sometimes be tricky to install. Please refer to the official TA-Lib installation guide for your operating system if you encounter issues.
 
-## Add your files
+4.  **Set up Environment Variables:**
+    Create a `.env` file in the root directory of the project (`nlp-2025l/`):
+    ```
+    REDDIT_CLIENT_ID="YOUR_REDDIT_CLIENT_ID"
+    REDDIT_CLIENT_SECRET="YOUR_REDDIT_CLIENT_SECRET"
+    REDDIT_USER_AGENT="YOUR_REDDIT_USER_AGENT_STRING"
+    ```
+    Replace the placeholder values with your actual API keys.
+    * **Reddit API Credentials:** Create an app on Reddit to get these https://www.reddit.com/prefs/apps. `REDDIT_CLIENT_ID` will be in the left top corner, `REDDIT_CLIENT_SECRET` will be next **secret** field, and `REDDIT_USER_AGENT` can be any string that describes your application.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+## Running the Application
 
+Once the setup is complete, run the Streamlit application:
+```bash
+streamlit run src/app.py
 ```
-cd existing_repo
-git remote add origin https://gitlab-stud.elka.pw.edu.pl/rkowalcz/nlp-2025l.git
-git branch -M main
-git push -uf origin main
+## Screenshots
+### Main Interface
+![Main Interface](screenshots/main.png)
+
+### Stock Chart
+![Stock Chart](screenshots/chart.png)
+
+### Generated Report Section in App
+![Report Section](screenshots/report.png)
+
+## Example Report Output
+
+The platform generates a detailed Markdown report. Here's a snippet from an example report for NVDA ([see full example](results/NVDA.md)):
+
+```markdown
+**NVDA Investment Report**
+
+**Executive Summary:**
+
+We recommend a **Hold** rating on NVDA with a price target range of $150-$160 over the next 6-12 months. This recommendation is based on NVDA's strong fundamentals, dominant position in the AI market, and robust growth prospects, tempered by its high valuation and potential short-term technical headwinds. While the long-term outlook remains positive, the current price reflects much of the anticipated growth, and potential risks warrant a cautious approach.
+
+**Sentiment Analysis Synthesis:**
+
+The sentiment surrounding NVDA is cautiously optimistic. Positive sentiment is fueled by significant deals like Oracle's planned purchase of Nvidia chips and Elon Musk's commitment to expanding GPU infrastructure. These developments underscore the strong demand for Nvidia's technology in the AI sector. However, concerns about slowing cloud spending and potential trade headwinds create a mixed sentiment.
+...
 ```
 
-## Integrate with your tools
+## Authors
+* **Daniel Machniak**
+* **Rafał Kowalczuk**
 
-- [ ] [Set up project integrations](https://gitlab-stud.elka.pw.edu.pl/rkowalcz/nlp-2025l/-/settings/integrations)
+## Disclaimer
+This analysis is for informational purposes only and is not financial or investment advice. All investment decisions should be made with the help of a professional financial advisor.
 
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Future Enhancements
+* Implement additional data sources for sentiment analysis (e.g., Twitter).
+* Expand the range of technical indicators available for customization.
+* Implement user accounts and history of generated reports.
+* Option to export reports to PDF.
