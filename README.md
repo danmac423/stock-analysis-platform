@@ -122,6 +122,10 @@ The sentiment surrounding NVDA is cautiously optimistic. Positive sentiment is f
 ...
 ```
 
+You can find more example reports (like `AAPL.md`) and raw data outputs (like `AAPL_news.json`) in the `/results` directory.
+
+
+
 ## Authors
 * **Daniel Machniak**
 * **Rafał Kowalczuk**
