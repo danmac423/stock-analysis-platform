@@ -149,7 +149,6 @@ class StockAnalysisCrew:
             ),
             agent=reporter,
             context=[research_task, technical_analysis_task, fundamental_analysis_task],
-            output_file="stock_analysis_report.md",
         )
 
         self.crew = Crew(
