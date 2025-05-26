@@ -63,7 +63,7 @@ The platform operates using a multi-agent system orchestrated by CrewAI:
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repository-url>
+    git clone https://gitlab-stud.elka.pw.edu.pl/rkowalcz/nlp-2025l.git
     cd nlp-2025l
     ```
 
@@ -93,7 +93,7 @@ The platform operates using a multi-agent system orchestrated by CrewAI:
 
 Once the setup is complete, run the Streamlit application:
 ```bash
-streamlit run src/app.py
+make run
 ```
 ## Screenshots
 ### Main Interface
