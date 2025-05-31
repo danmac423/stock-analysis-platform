@@ -63,8 +63,8 @@ The platform operates using a multi-agent system orchestrated by CrewAI:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://gitlab-stud.elka.pw.edu.pl/rkowalcz/nlp-2025l.git
-    cd nlp-2025l
+    git clone https://github.com/danmac423/stock-analysis-platform.git
+    cd stock-analysis-platform
     ```
 
 2.  **Create a virtual environment (recommended):**
